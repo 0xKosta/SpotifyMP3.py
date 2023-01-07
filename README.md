@@ -13,7 +13,7 @@ Doing that will install all the necessary modules, and will run the script.
 To get your Client ID and Secret, you have to log into [Spotify's Developer dashboard](https://developer.spotify.com/dashboard/).
 
 Once you've logged in, you will see this:
-![](https://i.imgur.com/ueyNDqm.png)
+![](https://i.imgur.com/GGSvMZP.png)
 
 Click on ``Create An App`` 
 
