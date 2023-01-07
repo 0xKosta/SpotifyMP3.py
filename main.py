@@ -5,6 +5,19 @@ import json
 import os
 import time as t
 
+def clear():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+def intro():
+    print(r'''  _____ ____   ___   ______  ____  _____  __ __  ___ ___  ____    ____  __ __ 
+ / ___/|    \ /   \ |      ||    ||     ||  |  ||   |   ||    \  |    \|  |  |
+(   \_ |  o  )     ||      | |  | |   __||  |  || _   _ ||  o  ) |  o  )  |  |
+ \__  ||   _/|  O  ||_|  |_| |  | |  |_  |  ~  ||  \_/  ||   _/  |   _/|  ~  |
+ /  \ ||  |  |     |  |  |   |  | |   _] |___, ||   |   ||  | __ |  |  |___, |
+ \    ||  |  |     |  |  |   |  | |  |   |     ||   |   ||  ||  ||  |  |     |
+  \___||__|   \___/   |__|  |____||__|   |____/ |___|___||__||__||__|  |____/      github.com/Buxx0
+                                                                              ''')
+    t.sleep(3)
 def youtube_download(song):
     ydl = yt.YoutubeDL(
         {
@@ -16,6 +29,7 @@ def youtube_download(song):
         video = ydl.extract_info(f"ytsearch:{song}",
                                   download=False)
         result = video["entries"][0]
+        clear()
         userResponse = input(f'''Found song: {result['title']}
 Download this song? [Y/N]\n''')\
             .upper()
@@ -27,12 +41,14 @@ Download this song? [Y/N]\n''')\
         print("Downloading song!")
         ydl.extract_info(f"ytsearch:{song}",
                          download=True)
+        clear()
         print("Song downloaded!")
 
 
 def spotifySearch(client, track):
     client_credentials_manager = SpotifyClientCredentials(client_id=client['cid'], client_secret=client['secret'])
     sp = sf.Spotify(client_credentials_manager=client_credentials_manager)
+    clear()
     track = sp.track(track)
     song = f"{track['artists'][0]['name']} - {track['name']}"
     print(f"Loaded track {track['name']} by {track['artists'][0]['name']}, searching YouTube.")
@@ -74,6 +90,7 @@ def exitChoice():
     return True
 
 def main():
+    intro()
     savedClient = loadClient()
     if savedClient == None:
         savedClient = authorization()
@@ -84,6 +101,7 @@ def main():
         track = input("Please paste the URL of the track you'd like to download.\n")
         spotifySearch(savedClient, track)
         exit = exitChoice()
+        clear()
     print("Exiting in 3 seconds...")
     t.sleep(3)
 
